@@ -69,7 +69,7 @@ angular.module('bardo.directives').directive 'slick', ($timeout) ->
         options[key] = scope.$eval(value) if key in SLICK_OPTION_WHITELIST
 
       # Call slick to initiate carousel
-      slick = element.slick(options)
+      slick = $(element).slick(options)
 
       # Link slick functions with bi-directional control binding, if any
       scope.internalControl = scope.control || {}
@@ -81,6 +81,8 @@ angular.module('bardo.directives').directive 'slick', ($timeout) ->
         return
 
       scope.onDirectiveInit()
+      if scope.settings.onInit
+        scope.settings.onInit(slick);
       return
     ),
     500

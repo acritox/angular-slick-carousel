@@ -40,7 +40,7 @@
               return options[key] = scope.$eval(value);
             }
           });
-          slick = element.slick(options);
+          slick = $(element).slick(options);
           scope.internalControl = scope.control || {};
           SLICK_FUNCTION_WHITELIST.forEach(function(value) {
             scope.internalControl[value] = function() {
@@ -48,6 +48,9 @@
             };
           });
           scope.onDirectiveInit();
+          if (scope.settings.onInit) {
+            scope.settings.onInit(slick);
+          }
         }), 500);
       }
     };
